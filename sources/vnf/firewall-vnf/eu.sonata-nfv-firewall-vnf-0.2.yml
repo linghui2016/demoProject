@@ -1,0 +1,49 @@
+author: Steven van Rossem, iMinds
+connection_points:
+- id: vnf:mgmt
+  type: interface
+- id: vnf:input
+  type: interface
+- id: vnf:output
+  type: interface
+description: '"A first firewall VNF descriptor"'
+descriptor_version: vnfd-schema-01
+name: firewall-vnf
+vendor: eu.sonata-nfv
+version: '0.2'
+virtual_deployment_units:
+- connection_points:
+  - id: vdu01:cp01
+    type: interface
+  - id: vdu01:cp02
+    type: interface
+  - id: vdu01:cp03
+    type: interface
+  id: vdu01
+  resource_requirements:
+    cpu:
+      vcpus: 1
+    memory:
+      size: 2
+      size_unit: GB
+    storage:
+      size: 10
+      size_unit: GB
+  vm_image: ubuntu:trusty
+  vm_image_format: qcow2
+virtual_links:
+- connection_points_reference:
+  - vdu01:cp01
+  - vnf:mgmt
+  connectivity_type: E-LAN
+  id: mgmt
+- connection_points_reference:
+  - vdu01:cp02
+  - vnf:input
+  connectivity_type: E-Line
+  id: input
+- connection_points_reference:
+  - vdu01:cp03
+  - vnf:output
+  connectivity_type: E-Line
+  id: output
