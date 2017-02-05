@@ -2,7 +2,8 @@ catalogues: [personal]
 description: Some description about this sample
 descriptor_extension: yml
 maintainer: Name, Company, Contact
-name: pt1
+name: demo_pt
 publish_to: [personal]
+repo_url: https://github.com/linghui2016/demo_pt.git
 vendor: eu.sonata-nfv.package
 version: '0.4'
