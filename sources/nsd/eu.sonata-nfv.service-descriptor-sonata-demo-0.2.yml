@@ -55,21 +55,11 @@ version: '0.2'
 virtual_links:
 - connection_points_reference:
   - ns:mgmt
-  - iperf:mgmt
   - firewall:mgmt
   - tcpdump:mgmt
+  - iperf:mgmt
   connectivity_type: E-LAN
   id: mgmt
-- connection_points_reference:
-  - ns:input
-  - iperf:input
-  connectivity_type: E-Line
-  id: ns:input-2-iperf
-- connection_points_reference:
-  - iperf:output
-  - firewall:input
-  connectivity_type: E-Line
-  id: iperf-2-firewall
 - connection_points_reference:
   - firewall:output
   - tcpdump:input
@@ -80,3 +70,13 @@ virtual_links:
   - ns:output
   connectivity_type: E-Line
   id: tcpdump-2-ns:output
+- connection_points_reference:
+  - ns:input
+  - iperf:input
+  connectivity_type: E-Line
+  id: ns:input-2-iperf
+- connection_points_reference:
+  - iperf:output
+  - firewall:input
+  connectivity_type: E-Line
+  id: iperf-2-firewall
