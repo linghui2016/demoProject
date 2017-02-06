@@ -11,72 +11,97 @@ description: '"The network service descriptor for the SONATA demo, comprising ip
 descriptor_version: '1.0'
 forwarding_graphs:
 - constituent_vnfs:
-  - vnf_iperf
-  - vnf_firewall
-  - vnf_tcpdump
+  - iperf
+  - firewall
+  - tcpdump
+  - vnf_iperf-vnf_27
   fg_id: ns:fg1
   network_forwarding_paths:
   - connection_points:
     - connection_point_ref: ns:input
       position: 1
-    - connection_point_ref: vnf_iperf:input
+    - connection_point_ref: iperf:input
       position: 2
-    - connection_point_ref: vnf_iperf:output
+    - connection_point_ref: iperf:output
       position: 3
-    - connection_point_ref: vnf_firewall:input
+    - connection_point_ref: firewall:input
       position: 4
-    - connection_point_ref: vnf_firewall:output
+    - connection_point_ref: firewall:output
       position: 5
-    - connection_point_ref: vnf_tcpdump:input
+    - connection_point_ref: tcpdump:input
       position: 6
-    - connection_point_ref: vnf_tcpdump:output
+    - connection_point_ref: tcpdump:output
       position: 7
     - connection_point_ref: ns:output
       position: 8
     fp_id: ns:fg1:fp1
+  - connection_points:
+    - connection_point_ref: ns:input
+      position: 1
+    - connection_point_ref: vnf_iperf-vnf_27:input
+      position: 2
+    - connection_point_ref: vnf_iperf-vnf_27:output
+      position: 3
+    - connection_point_ref: ns:output
+      position: 4
+    fp_id: ns:fg1:fp2
   number_of_endpoints: 2
-  number_of_virtual_links: 4
+  number_of_virtual_links: 6
 name: sonata-demo
 network_functions:
-- vnf_id: vnf_firewall
+- vnf_id: firewall
   vnf_name: firewall-vnf
   vnf_vendor: eu.sonata-nfv
   vnf_version: '0.2'
-- vnf_id: vnf_iperf
+- vnf_id: iperf
   vnf_name: iperf-vnf
   vnf_vendor: eu.sonata-nfv
   vnf_version: '0.2'
-- vnf_id: vnf_tcpdump
+- vnf_id: tcpdump
   vnf_name: tcpdump-vnf
+  vnf_vendor: eu.sonata-nfv
+  vnf_version: '0.2'
+- vnf_id: vnf_iperf-vnf_27
+  vnf_name: iperf-vnf
   vnf_vendor: eu.sonata-nfv
   vnf_version: '0.2'
 vendor: eu.sonata-nfv.service-descriptor
 version: '0.2'
 virtual_links:
 - connection_points_reference:
-  - vnf_iperf:mgmt
-  - vnf_firewall:mgmt
-  - vnf_tcpdump:mgmt
   - ns:mgmt
+  - iperf:mgmt
+  - firewall:mgmt
+  - tcpdump:mgmt
   connectivity_type: E-LAN
   id: mgmt
 - connection_points_reference:
   - ns:input
-  - vnf_iperf:input
+  - iperf:input
   connectivity_type: E-Line
-  id: input-2-iperf
+  id: ns:input-2-iperf
 - connection_points_reference:
-  - vnf_iperf:output
-  - vnf_firewall:input
+  - iperf:output
+  - firewall:input
   connectivity_type: E-Line
   id: iperf-2-firewall
 - connection_points_reference:
-  - vnf_firewall:output
-  - vnf_tcpdump:input
+  - firewall:output
+  - tcpdump:input
   connectivity_type: E-Line
   id: firewall-2-tcpdump
 - connection_points_reference:
-  - vnf_tcpdump:output
+  - tcpdump:output
   - ns:output
   connectivity_type: E-Line
-  id: tcpdump-2-output
+  id: tcpdump-2-ns:output
+- connection_points_reference:
+  - ns:input
+  - vnf_iperf-vnf_27:input
+  connectivity_type: E-Line
+  id: ns:input-2-vnf_iperf-vnf_27
+- connection_points_reference:
+  - vnf_iperf-vnf_27:output
+  - ns:output
+  connectivity_type: E-Line
+  id: vnf_iperf-vnf_27-2-ns:output
